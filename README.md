@@ -28,11 +28,15 @@ http://localhost:8000/
 ## Endpoints
 
 - **POST** `/api/register/`
+![alt text](api-photos/api-register.png)
 - **POST** `/api/check-eligibility/`
+![alt text](api-photos/api-check-eligibility.png)
 - **POST** `/api/create-loan/`
+![alt text](api-photos/api-create-loan.png)
 - **GET** `/api/view-loan/<loan_id>/`
+![alt text](api-photos/api-view-loan.png)
 - **GET** `/api/view-loans/<customer_id>/`
-
+![alt text](api-photos/api-view-loans.png)
 ---
 
 ## Key Implementation Notes
@@ -51,10 +55,23 @@ http://localhost:8000/
 docker compose exec web python manage.py test
 ```
 or Locally:
+1. create the venv with:
+```bash
+uv sync
+```
+2. Activate the virtual env :
+- for linux:
+```bash
+source .venv/bin/activate
+```
+- for windows:
+```bash
+source .venv/Scripts/activate
+```
+3. Then run the test:
 ```bash
 python manage.py test
 ```
-
 ---
 
 ## Tech Stack
@@ -63,3 +80,20 @@ python manage.py test
 - PostgreSQL (Docker)
 - Pandas
 - Docker Compose
+
+
+## Project Structure
+```
+.
+├── credit_system/           Django project configuration (settings, urls, wsgi)
+├── loans/                   Core app: models, views, serializers, utils, tests, ingestion command
+├── data/                    Provided Excel datasets used for initial ingestion
+├── Dockerfile               Docker image definition for the Django service
+├── docker-compose.yml       Orchestrates Django app + PostgreSQL
+├── manage.py                Django management entry point
+├── requirements.txt         Python dependencies used in the container
+├── pyproject.toml           Project dependency configuration (uv)
+├── uv.lock                  Locked dependency versions for reproducible installs
+├── .gitignore               Excludes local/dev artifacts from git
+└── README.md                Project documentation
+```
